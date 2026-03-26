@@ -88,6 +88,7 @@ final class AppViewModel {
             
             // Incrementa sempre que terminar uma análise
             userProfile.analysisCount += 1
+            Task { await SupabaseService.shared.updateProfile(userProfile) }
             
             withAnimation(.spring(response: 0.8, dampingFraction: 0.85)) {
                 currentScreen = .result
@@ -206,13 +207,33 @@ final class AppViewModel {
     private func updateProfile(user: User) {
         userProfile.id = user.id.uuidString
         userProfile.email = user.email
-        // Aqui você poderia buscar dados adicionais do perfil na tabela 'profiles' do Supabase
-        // fetchProfileData(userId: user.id)
+        
+        // Tenta buscar o nome nos metadados (Google/GitHub/Signup)
+        let metadata = user.userMetadata
+        if let fullName = metadata["full_name"]?.value as? String {
+            userProfile.name = fullName
+        } else if let name = metadata["name"]?.value as? String {
+            userProfile.name = name
+        }
+        
+        fetchProfileData()
+    }
+    
+    func fetchProfileData() {
+        Task { @MainActor in
+            do {
+                let profile = try await SupabaseService.shared.fetchProfile()
+                self.userProfile = profile
+            } catch {
+                // Perfil ainda não existe no banco, vamos usar o padrão
+            }
+        }
     }
     
     func signOut() {
         Task { @MainActor in
             try? await SupabaseService.shared.signOut()
+            userProfile = UserProfile() // Reseta o contador e status
             isAuthenticated = false
             currentScreen = .landing
             resetToLanding()

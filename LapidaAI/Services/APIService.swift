@@ -317,6 +317,25 @@ public final class SupabaseService {
         try? await client.auth.session.user
     }
     
+    func fetchProfile() async throws -> UserProfile {
+        let user = try await client.auth.session.user
+        let profile: UserProfile = try await client.database
+            .from("profiles")
+            .select()
+            .eq("id", value: user.id)
+            .single()
+            .execute()
+            .value
+        return profile
+    }
+    
+    func updateProfile(_ profile: UserProfile) async {
+        try? await client.database
+            .from("profiles")
+            .upsert(profile)
+            .execute()
+    }
+    
     func signOut() async throws {
         try await client.auth.signOut()
     }

@@ -71,6 +71,11 @@ struct LandingView: View {
             Spacer()
             
             Menu {
+                Section {
+                    Text(viewModel.userProfile.email ?? "Usuário")
+                        .font(AppTypography.captionSmall)
+                }
+                
                 if !viewModel.userProfile.isPremium {
                     Button {
                         viewModel.showPremiumModal = true
@@ -96,11 +101,14 @@ struct LandingView: View {
                             .clipShape(Capsule())
                     }
                     
-                    ZStack(alignment: .topTrailing) {
-                        Image(systemName: "person.circle.fill")
-                            .font(.system(size: 28))
-                            .foregroundStyle(AppColors.textSecondary)
-                        
+                    Image(systemName: "person.circle.fill")
+                        .font(.system(size: 28))
+                        .foregroundStyle(AppColors.textSecondary)
+                        .padding(AppSpacing.xs)
+                        .background(.ultraThinMaterial)
+                        .clipShape(Circle())
+                    
+                    HStack(spacing: AppSpacing.xs) {
                         if viewModel.userProfile.isPremium {
                             Image(systemName: "crown.fill")
                                 .font(.system(size: 14))
@@ -111,13 +119,14 @@ struct LandingView: View {
                                         endPoint: .bottom
                                     )
                                 )
-                                .offset(x: 8, y: -8)
                                 .shadow(color: .black.opacity(0.3), radius: 2)
                         }
+                        
+                        Text(viewModel.userProfile.name ?? viewModel.userProfile.email?.components(separatedBy: "@").first ?? "Usuário")
+                            .font(AppTypography.body)
+                            .fontWeight(viewModel.userProfile.isPremium ? .bold : .regular)
+                            .foregroundStyle(AppColors.textPrimary)
                     }
-                    .padding(AppSpacing.xs)
-                    .background(.ultraThinMaterial)
-                    .clipShape(Circle())
                 }
             }
         }

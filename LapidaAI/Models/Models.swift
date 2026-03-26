@@ -149,19 +149,31 @@ enum InputType: String, Codable {
 struct UserProfile: Codable {
     var id: String?
     var email: String?
+    var name: String?
     var analysisCount: Int
     var isPremium: Bool
     var createdAt: Date?
     
+    enum CodingKeys: String, CodingKey {
+        case id
+        case email
+        case name
+        case analysisCount = "analysis_count"
+        case isPremium = "is_premium"
+        case createdAt = "created_at"
+    }
+    
     init(
         id: String? = nil,
         email: String? = nil,
+        name: String? = nil,
         analysisCount: Int = 0,
         isPremium: Bool = false,
         createdAt: Date? = nil
     ) {
         self.id = id
         self.email = email
+        self.name = name
         self.analysisCount = analysisCount
         self.isPremium = isPremium
         self.createdAt = createdAt
