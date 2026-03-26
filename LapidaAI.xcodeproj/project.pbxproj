@@ -36,7 +36,7 @@
 		5107FC5768C3434DE6E2E382 /* AnalysisLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisLoadingView.swift; sourceTree = "<group>"; };
 		6743A81B2C792D1B2BCA017E /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
 		71B95DAF37A4F0EB86D9E3C4 /* RadarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChartView.swift; sourceTree = "<group>"; };
-		79ED67A616CF039461689D6A /* LapidaAI.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = LapidaAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		79ED67A616CF039461689D6A /* LapidaAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LapidaAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81673F0B7F112CF5E27C985D /* ResultDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDashboardView.swift; sourceTree = "<group>"; };
 		9C3181CD1D41016C957873B6 /* SuggestionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCardView.swift; sourceTree = "<group>"; };
 		A8AE0C6B42127126F350E22B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -205,8 +205,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 7CA336FB9E26B8F31966FBB1 /* Build configuration list for PBXProject "LapidaAI" */;
 			developmentRegion = en;
@@ -275,6 +273,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6F2KGULZ85;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LapidaAI/Info.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -426,6 +425,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6F2KGULZ85;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LapidaAI/Info.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
