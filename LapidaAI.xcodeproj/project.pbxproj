@@ -1,0 +1,489 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		031D857D65ACCD94EE2FD063 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = D688BAD8652D271E46E7ADFE /* Supabase */; };
+		247C991ABF2A2728C35817D6 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF069E27EBDD632F99B6714C /* LandingView.swift */; };
+		3124CE9753570D4906F2DCFB /* PremiumModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BEDA54F37C0E51F8FB25A /* PremiumModalView.swift */; };
+		379E2664E164A072242F3C15 /* SuggestionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3181CD1D41016C957873B6 /* SuggestionCardView.swift */; };
+		55CE39594B5345C308374CB2 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8ED6EE43E113A238E0AE4B /* APIService.swift */; };
+		64C4B4BB31947F24EBB3F5CA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFD63E4D02BB7E6354A29D /* LoginView.swift */; };
+		7C1D6F34A7ED933F91A05536 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4FA0F63976237F5455B48 /* AppTheme.swift */; };
+		945DBB14BF49EE2472050DE4 /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005381881383BE26895F8261 /* GlassCard.swift */; };
+		97DD5CD38DF9824C4B121D80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D9AB8CEE30F145E56BB569E /* Assets.xcassets */; };
+		9C69D89FCF9E0AE6F56EE118 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53AF21F58383A80ECFFE2FF /* Animations.swift */; };
+		B78E583FCBB0FF17D46208F2 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6743A81B2C792D1B2BCA017E /* QRCodeGenerator.swift */; };
+		BA92A135223C826BB5AC347D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7769642C4325B481115AEC3 /* ContentView.swift */; };
+		C346AF64CDAEB23FD3B47748 /* AnalysisLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5107FC5768C3434DE6E2E382 /* AnalysisLoadingView.swift */; };
+		D01017C2B62C1C02B27DE669 /* RadarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B95DAF37A4F0EB86D9E3C4 /* RadarChartView.swift */; };
+		D92E922B0CF7EAA12BE827A9 /* LapidaAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00B7FCBCBA6036009A9A /* LapidaAIApp.swift */; };
+		D99896C7035EF26D2B03C5C2 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4D573D9A98EF1EEFC1CD1 /* AppViewModel.swift */; };
+		EC11EADF1A4966A292D5CAD6 /* ResultDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81673F0B7F112CF5E27C985D /* ResultDashboardView.swift */; };
+		F14D8755A661BF84908E3524 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195309A1C89CE59CADF19FDA /* Models.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		005381881383BE26895F8261 /* GlassCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassCard.swift; sourceTree = "<group>"; };
+		195309A1C89CE59CADF19FDA /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		2D9AB8CEE30F145E56BB569E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3AAF00B7FCBCBA6036009A9A /* LapidaAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapidaAIApp.swift; sourceTree = "<group>"; };
+		3D2BEDA54F37C0E51F8FB25A /* PremiumModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumModalView.swift; sourceTree = "<group>"; };
+		5107FC5768C3434DE6E2E382 /* AnalysisLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisLoadingView.swift; sourceTree = "<group>"; };
+		6743A81B2C792D1B2BCA017E /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		71B95DAF37A4F0EB86D9E3C4 /* RadarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChartView.swift; sourceTree = "<group>"; };
+		79ED67A616CF039461689D6A /* LapidaAI.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = LapidaAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81673F0B7F112CF5E27C985D /* ResultDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDashboardView.swift; sourceTree = "<group>"; };
+		9C3181CD1D41016C957873B6 /* SuggestionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCardView.swift; sourceTree = "<group>"; };
+		A8AE0C6B42127126F350E22B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ACD4FA0F63976237F5455B48 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		C53AF21F58383A80ECFFE2FF /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
+		C7769642C4325B481115AEC3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DF069E27EBDD632F99B6714C /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		EAC4D573D9A98EF1EEFC1CD1 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		EC8ED6EE43E113A238E0AE4B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		EDEFD63E4D02BB7E6354A29D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F746784FBC60DFB0D600EBF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				031D857D65ACCD94EE2FD063 /* Supabase in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		16C5F542E708210C326F065A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EC8ED6EE43E113A238E0AE4B /* APIService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		22C9734FC742D28198A11D87 /* LapidaAI */ = {
+			isa = PBXGroup;
+			children = (
+				2D9AB8CEE30F145E56BB569E /* Assets.xcassets */,
+				A8AE0C6B42127126F350E22B /* Info.plist */,
+				FA24AF8BAF56CD78CF662C44 /* App */,
+				80019E6A50EFA3EC8D2F674B /* DesignSystem */,
+				674DA4E615F7FC395675C27E /* Models */,
+				E8862C4B9C4CEBD4CBEC6ED7 /* Preview Content */,
+				16C5F542E708210C326F065A /* Services */,
+				508CE15AB1DE6C5AE474CA43 /* Utilities */,
+				80DD0C4F51C7E1DDA751683C /* ViewModels */,
+				49734F8ADE65752B39F4E894 /* Views */,
+			);
+			path = LapidaAI;
+			sourceTree = "<group>";
+		};
+		3A66251638E0654F4682B7A1 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				71B95DAF37A4F0EB86D9E3C4 /* RadarChartView.swift */,
+				9C3181CD1D41016C957873B6 /* SuggestionCardView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		3E8799216DFDC5AB3426BD3C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				79ED67A616CF039461689D6A /* LapidaAI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4571AA0978632D25DF852F74 = {
+			isa = PBXGroup;
+			children = (
+				22C9734FC742D28198A11D87 /* LapidaAI */,
+				3E8799216DFDC5AB3426BD3C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		49734F8ADE65752B39F4E894 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5107FC5768C3434DE6E2E382 /* AnalysisLoadingView.swift */,
+				C7769642C4325B481115AEC3 /* ContentView.swift */,
+				DF069E27EBDD632F99B6714C /* LandingView.swift */,
+				EDEFD63E4D02BB7E6354A29D /* LoginView.swift */,
+				3D2BEDA54F37C0E51F8FB25A /* PremiumModalView.swift */,
+				81673F0B7F112CF5E27C985D /* ResultDashboardView.swift */,
+				3A66251638E0654F4682B7A1 /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		508CE15AB1DE6C5AE474CA43 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				6743A81B2C792D1B2BCA017E /* QRCodeGenerator.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		674DA4E615F7FC395675C27E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				195309A1C89CE59CADF19FDA /* Models.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		80019E6A50EFA3EC8D2F674B /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				C53AF21F58383A80ECFFE2FF /* Animations.swift */,
+				ACD4FA0F63976237F5455B48 /* AppTheme.swift */,
+				005381881383BE26895F8261 /* GlassCard.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		80DD0C4F51C7E1DDA751683C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EAC4D573D9A98EF1EEFC1CD1 /* AppViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E8862C4B9C4CEBD4CBEC6ED7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FA24AF8BAF56CD78CF662C44 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				3AAF00B7FCBCBA6036009A9A /* LapidaAIApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FFCEBB9E4F55298E0D763C1E /* LapidaAI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D19C4084EE8CAABCB1351487 /* Build configuration list for PBXNativeTarget "LapidaAI" */;
+			buildPhases = (
+				F3115A9181F7845D5E924006 /* Sources */,
+				09B2EC161AF1B4C770D3344F /* Resources */,
+				F746784FBC60DFB0D600EBF1 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LapidaAI;
+			packageProductDependencies = (
+				D688BAD8652D271E46E7ADFE /* Supabase */,
+			);
+			productName = LapidaAI;
+			productReference = 79ED67A616CF039461689D6A /* LapidaAI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		33EBDB28BCE28F5B0638D1BC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 7CA336FB9E26B8F31966FBB1 /* Build configuration list for PBXProject "LapidaAI" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 4571AA0978632D25DF852F74;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0D9935DEBA90E121BA328DC9 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3E8799216DFDC5AB3426BD3C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FFCEBB9E4F55298E0D763C1E /* LapidaAI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		09B2EC161AF1B4C770D3344F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97DD5CD38DF9824C4B121D80 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F3115A9181F7845D5E924006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55CE39594B5345C308374CB2 /* APIService.swift in Sources */,
+				C346AF64CDAEB23FD3B47748 /* AnalysisLoadingView.swift in Sources */,
+				9C69D89FCF9E0AE6F56EE118 /* Animations.swift in Sources */,
+				7C1D6F34A7ED933F91A05536 /* AppTheme.swift in Sources */,
+				D99896C7035EF26D2B03C5C2 /* AppViewModel.swift in Sources */,
+				BA92A135223C826BB5AC347D /* ContentView.swift in Sources */,
+				945DBB14BF49EE2472050DE4 /* GlassCard.swift in Sources */,
+				247C991ABF2A2728C35817D6 /* LandingView.swift in Sources */,
+				D92E922B0CF7EAA12BE827A9 /* LapidaAIApp.swift in Sources */,
+				64C4B4BB31947F24EBB3F5CA /* LoginView.swift in Sources */,
+				F14D8755A661BF84908E3524 /* Models.swift in Sources */,
+				3124CE9753570D4906F2DCFB /* PremiumModalView.swift in Sources */,
+				B78E583FCBB0FF17D46208F2 /* QRCodeGenerator.swift in Sources */,
+				D01017C2B62C1C02B27DE669 /* RadarChartView.swift in Sources */,
+				EC11EADF1A4966A292D5CAD6 /* ResultDashboardView.swift in Sources */,
+				379E2664E164A072242F3C15 /* SuggestionCardView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4133881381DBD296530D407F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LapidaAI/Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lapidaai.app;
+				PRODUCT_NAME = LapidaAI;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5DF234188EBA23A5F904C720 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LapidaAI;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		990F22F08CD158E4CEE76D54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LapidaAI;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		E1BE8E9BB5EFE044426EF6D4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LapidaAI/Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lapidaai.app;
+				PRODUCT_NAME = LapidaAI;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7CA336FB9E26B8F31966FBB1 /* Build configuration list for PBXProject "LapidaAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				990F22F08CD158E4CEE76D54 /* Debug */,
+				5DF234188EBA23A5F904C720 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D19C4084EE8CAABCB1351487 /* Build configuration list for PBXNativeTarget "LapidaAI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1BE8E9BB5EFE044426EF6D4 /* Debug */,
+				4133881381DBD296530D407F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0D9935DEBA90E121BA328DC9 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D688BAD8652D271E46E7ADFE /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D9935DEBA90E121BA328DC9 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 33EBDB28BCE28F5B0638D1BC /* Project object */;
+}
