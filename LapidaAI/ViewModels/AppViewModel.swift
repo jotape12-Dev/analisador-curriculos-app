@@ -52,6 +52,12 @@ final class AppViewModel {
     
     // MARK: - Analysis Flow
     func startAnalysis() {
+        // Bloqueio para usuários gratuitos (Limite de 3 análises)
+        if !userProfile.isPremium && userProfile.analysisCount >= 3 {
+            showPremiumModal = true
+            return
+        }
+        
         guard !inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             showErrorMessage("Por favor, insira o texto do seu currículo ou importe um PDF.")
             return
@@ -75,20 +81,17 @@ final class AppViewModel {
                 _ = try? await minimumDelay
                 
                 analysisResult = result
-                userProfile.analysisCount += 1
-                
-                withAnimation(.spring(response: 0.8, dampingFraction: 0.85)) {
-                    currentScreen = .result
-                    isAnalyzing = false
-                }
             } catch {
                 // Use demo data for development/offline
                 loadDemoData()
-                
-                withAnimation(.spring(response: 0.8, dampingFraction: 0.85)) {
-                    currentScreen = .result
-                    isAnalyzing = false
-                }
+            }
+            
+            // Incrementa sempre que terminar uma análise
+            userProfile.analysisCount += 1
+            
+            withAnimation(.spring(response: 0.8, dampingFraction: 0.85)) {
+                currentScreen = .result
+                isAnalyzing = false
             }
         }
     }

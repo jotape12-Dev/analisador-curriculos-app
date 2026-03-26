@@ -9,8 +9,10 @@ struct LoginView: View {
     @State private var isSignUp = false
     
     var body: some View {
-        VStack(spacing: AppSpacing.xxl) {
-            Spacer()
+        ScrollView(showsIndicators: false) {
+            VStack(spacing: AppSpacing.xl) {
+                Spacer()
+                    .frame(height: AppSpacing.xxl)
             
             // Header
             VStack(spacing: AppSpacing.md) {
@@ -34,6 +36,7 @@ struct LoginView: View {
                 Text("Boas-vindas ao LapidaAI")
                     .font(AppTypography.largeTitle)
                     .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
                     .foregroundStyle(AppColors.textPrimary)
                 
                 Text("Faça login para desbloquear seu potencial e salvar suas análises com segurança.")
@@ -164,8 +167,9 @@ struct LoginView: View {
             .padding(.horizontal, AppSpacing.xl)
             
             Spacer().frame(height: AppSpacing.lg)
+            }
+            .padding(.bottom, AppSpacing.xxl)
         }
-        .padding(AppSpacing.xl)
         .background(
             ZStack {
                 AppColors.background.ignoresSafeArea()

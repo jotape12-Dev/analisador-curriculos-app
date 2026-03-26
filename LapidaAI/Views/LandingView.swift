@@ -71,18 +71,54 @@ struct LandingView: View {
             Spacer()
             
             Menu {
+                if !viewModel.userProfile.isPremium {
+                    Button {
+                        viewModel.showPremiumModal = true
+                    } label: {
+                        Label("Torne-se Premium", systemImage: "star.fill")
+                    }
+                }
+                
                 Button(role: .destructive) {
                     viewModel.signOut()
                 } label: {
                     Label("Sair da Conta", systemImage: "rectangle.portrait.and.arrow.right")
                 }
             } label: {
-                Image(systemName: "person.circle.fill")
-                    .font(.system(size: 24))
-                    .foregroundStyle(AppColors.textSecondary)
-                    .padding(AppSpacing.sm)
+                HStack(spacing: AppSpacing.sm) {
+                    if !viewModel.userProfile.isPremium {
+                        Text("\(viewModel.userProfile.analysisCount)/3")
+                            .font(AppTypography.captionSmall)
+                            .foregroundStyle(AppColors.textTertiary)
+                            .padding(.horizontal, AppSpacing.sm)
+                            .padding(.vertical, 2)
+                            .background(AppColors.glassBorder.opacity(0.3))
+                            .clipShape(Capsule())
+                    }
+                    
+                    ZStack(alignment: .topTrailing) {
+                        Image(systemName: "person.circle.fill")
+                            .font(.system(size: 28))
+                            .foregroundStyle(AppColors.textSecondary)
+                        
+                        if viewModel.userProfile.isPremium {
+                            Image(systemName: "crown.fill")
+                                .font(.system(size: 14))
+                                .foregroundStyle(
+                                    LinearGradient(
+                                        colors: [Color(hex: "FFD700"), Color(hex: "FFA500")],
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    )
+                                )
+                                .offset(x: 8, y: -8)
+                                .shadow(color: .black.opacity(0.3), radius: 2)
+                        }
+                    }
+                    .padding(AppSpacing.xs)
                     .background(.ultraThinMaterial)
                     .clipShape(Circle())
+                }
             }
         }
         .padding(.top, AppSpacing.md)
