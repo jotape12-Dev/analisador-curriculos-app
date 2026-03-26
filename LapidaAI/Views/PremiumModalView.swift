@@ -300,7 +300,7 @@ struct PremiumModalView: View {
                             .tint(AppColors.primary)
                             .scaleEffect(0.8)
                         
-                        Text("Verificação automática ativa (a cada 3s)")
+                        Text("Verificação automática ativa")
                             .font(AppTypography.captionSmall)
                             .foregroundStyle(AppColors.textTertiary)
                     }
@@ -316,7 +316,6 @@ struct PremiumModalView: View {
                 .overlay(AppColors.glassBorder)
             
             HStack(spacing: AppSpacing.md) {
-                // Back/Cancel button
                 Button {
                     if viewModel.paymentStep == .pix && !viewModel.paymentConfirmed {
                         withAnimation(.spring(response: 0.4)) {
@@ -336,7 +335,6 @@ struct PremiumModalView: View {
                 .buttonStyle(GlassButtonStyle())
                 .disabled(viewModel.isCheckingPayment || viewModel.isGeneratingPix)
                 
-                // Main action button
                 if viewModel.paymentStep == .benefits {
                     Button {
                         viewModel.generatePix()
@@ -392,9 +390,4 @@ struct PremiumModalView: View {
             }
         }
     }
-}
-
-#Preview {
-    PremiumModalView()
-        .environment(AppViewModel())
 }

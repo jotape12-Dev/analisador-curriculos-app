@@ -86,12 +86,19 @@ struct LoginView: View {
             .disabled(isLoggingIn)
             .opacity(isLoggingIn ? 0.7 : 1)
             
-            // Terms
-            Text("Ao continuar, você concorda com nossos Termos de Uso e Política de Privacidade.")
-                .font(AppTypography.captionSmall)
-                .foregroundStyle(AppColors.textTertiary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, AppSpacing.xl)
+            // Terms & Privacy Link
+            VStack(spacing: AppSpacing.xs) {
+                Text("Ao continuar, você concorda com nossos")
+                    .font(AppTypography.captionSmall)
+                    .foregroundStyle(AppColors.textTertiary)
+                
+                Link("Termos de Uso e Política de Privacidade", destination: URL(string: "https://west-countess-f4d.notion.site/Pol-tica-de-Privacidade-LapidaAI-32fc6b9cebbe807fb0d5e8966a22e4cc")!)
+                    .font(AppTypography.captionSmall)
+                    .fontWeight(.bold)
+                    .foregroundStyle(AppColors.primary)
+            }
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, AppSpacing.xl)
             
             Spacer().frame(height: AppSpacing.lg)
         }
