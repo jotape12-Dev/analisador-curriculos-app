@@ -3,7 +3,10 @@ import Supabase
 
 struct LoginView: View {
     @Environment(AppViewModel.self) private var viewModel
+    @State private var email = ""
+    @State private var password = ""
     @State private var isLoggingIn = false
+    @State private var isSignUp = false
     
     var body: some View {
         VStack(spacing: AppSpacing.xxl) {
@@ -40,15 +43,75 @@ struct LoginView: View {
                     .padding(.horizontal, AppSpacing.xl)
             }
             
+            // Email/Password Form
+            VStack(spacing: AppSpacing.md) {
+                VStack(spacing: AppSpacing.sm) {
+                    TextField("E-mail", text: $email)
+                        .keyboardType(.emailAddress)
+                        .autocapitalization(.none)
+                        .padding()
+                        .background(AppColors.surface)
+                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: AppRadius.md)
+                                .stroke(AppColors.glassBorder, lineWidth: 1)
+                        )
+                    
+                    SecureField("Senha", text: $password)
+                        .padding()
+                        .background(AppColors.surface)
+                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: AppRadius.md)
+                                .stroke(AppColors.glassBorder, lineWidth: 1)
+                        )
+                }
+                
+                Button {
+                    isLoggingIn = true
+                    if isSignUp {
+                        viewModel.signUpWithEmail(email: email, password: password)
+                    } else {
+                        viewModel.signInWithEmail(email: email, password: password)
+                    }
+                } label: {
+                    Text(isSignUp ? "Criar Conta" : "Entrar")
+                        .font(AppTypography.headline)
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, AppSpacing.md)
+                        .background(AppColors.primary)
+                        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
+                }
+                .disabled(email.isEmpty || password.count < 6)
+                .opacity((email.isEmpty || password.count < 6) ? 0.6 : 1)
+                
+                Button {
+                    withAnimation { isSignUp.toggle() }
+                } label: {
+                    Text(isSignUp ? "Já tem conta? Entrar" : "Não tem conta? Cadastre-se")
+                        .font(AppTypography.caption)
+                        .foregroundStyle(AppColors.textSecondary)
+                }
+            }
+            .padding(.horizontal, AppSpacing.xl)
+            
+            // OR Divider
+            HStack {
+                Rectangle().fill(AppColors.glassBorder).frame(height: 1)
+                Text("ou continue com").font(AppTypography.caption).foregroundStyle(AppColors.textTertiary)
+                Rectangle().fill(AppColors.glassBorder).frame(height: 1)
+            }
+            .padding(.horizontal, AppSpacing.xl)
+            
             Spacer()
             
-            // Google Login Button
             Button {
                 isLoggingIn = true
                 viewModel.signInWithGoogle()
             } label: {
                 HStack(spacing: AppSpacing.md) {
-                    Image("google_logo") // Você precisará dos assets
+                    Image("google_logo")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
@@ -121,9 +184,4 @@ extension View {
                 .foregroundColor(.gray)
         )
     }
-}
-
-#Preview {
-    LoginView()
-        .environment(AppViewModel())
 }

@@ -18,6 +18,7 @@ final class AppViewModel {
     var showError = false
     var isAuthenticated = false
     var isAuthenticating = false
+    var alertTitle = "Erro"
     
     // Loading state
     var isAnalyzing = false
@@ -134,6 +135,35 @@ final class AppViewModel {
     /// Login com GitHub via Supabase OAuth
     func signInWithGitHub() {
         performOAuthSignIn(provider: .github)
+    }
+    
+    func signInWithEmail(email: String, password: String) {
+        isAuthenticating = true
+        Task { @MainActor in
+            do {
+                let user = try await SupabaseService.shared.signIn(email: email, password: password)
+                updateProfile(user: user)
+                withAnimation(.spring()) {
+                    isAuthenticated = true
+                }
+            } catch {
+                showErrorMessage(error.localizedDescription)
+            }
+            isAuthenticating = false
+        }
+    }
+    
+    func signUpWithEmail(email: String, password: String) {
+        isAuthenticating = true
+        Task { @MainActor in
+            do {
+                _ = try await SupabaseService.shared.signUp(email: email, password: password)
+                showAlert(title: "Sucesso!", message: "Cadastro realizado! Verifique seu e-mail para confirmar a conta.")
+            } catch {
+                showErrorMessage("Erro ao cadastrar: \(error.localizedDescription)")
+            }
+            isAuthenticating = false
+        }
     }
     
     private func performOAuthSignIn(provider: Provider) {
@@ -346,9 +376,14 @@ final class AppViewModel {
     }
     
     // MARK: - Error Handling
-    func showErrorMessage(_ message: String) {
+    func showAlert(title: String, message: String) {
+        alertTitle = title
         errorMessage = message
         showError = true
+    }
+    
+    func showErrorMessage(_ message: String) {
+        showAlert(title: "Erro", message: message)
     }
     
     // MARK: - Demo Data

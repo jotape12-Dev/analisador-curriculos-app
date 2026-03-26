@@ -291,6 +291,16 @@ public final class SupabaseService {
         )
     }
     
+    func signIn(email: String, password: String) async throws -> User {
+        let response = try await client.auth.signIn(email: email, password: password)
+        return response.user
+    }
+    
+    func signUp(email: String, password: String) async throws -> User {
+        let response = try await client.auth.signUp(email: email, password: password)
+        return response.user
+    }
+    
     func signInWithOAuth(provider: Provider) async throws -> URL {
         let url = try client.auth.getOAuthSignInURL(
             provider: provider,

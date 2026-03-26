@@ -50,7 +50,7 @@ struct ContentView: View {
                 viewModel.handleAuthCallback(url: url)
             }
         }
-        .alert("Erro", isPresented: Binding(
+        .alert(viewModel.alertTitle, isPresented: Binding(
             get: { viewModel.showError },
             set: { viewModel.showError = $0 }
         )) {
