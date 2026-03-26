@@ -1,5 +1,6 @@
 import SwiftUI
-import Auth
+import Supabase
+import PDFKit
 import UniformTypeIdentifiers
 
 // MARK: - App ViewModel (Observable)
@@ -209,25 +210,16 @@ final class AppViewModel {
     }
     
     private func extractTextFromPDF(data: Data) -> String? {
-        guard let provider = CGDataProvider(data: data as CFData),
-              let document = CGPDFDocument(provider) else { return nil }
+        guard let document = PDFDocument(data: data) else { return nil }
+        var fullText = ""
         
-        var text = ""
-        for i in 1...document.numberOfPages {
-            guard let page = document.page(at: i) else { continue }
-            // Basic text extraction - for production use PDFKit or a library
-            // This is a placeholder that returns the data as UTF8
-            if let content = String(data: data, encoding: .utf8) {
-                text += content
+        for i in 0..<document.pageCount {
+            if let page = document.page(at: i), let content = page.string {
+                fullText += content + "\n"
             }
         }
         
-        // Fallback: use the raw data as text if PDF parsing is basic
-        if text.isEmpty {
-            text = String(data: data, encoding: .utf8) ?? ""
-        }
-        
-        return text.isEmpty ? nil : text
+        return fullText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : fullText
     }
     
     // MARK: - Payment Flow
