@@ -14,6 +14,7 @@
 		55CE39594B5345C308374CB2 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8ED6EE43E113A238E0AE4B /* APIService.swift */; };
 		64C4B4BB31947F24EBB3F5CA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFD63E4D02BB7E6354A29D /* LoginView.swift */; };
 		7C1D6F34A7ED933F91A05536 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4FA0F63976237F5455B48 /* AppTheme.swift */; };
+		7C442DA32F75A6BB0007002B /* StoreSevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C442DA22F75A6B50007002B /* StoreSevice.swift */; };
 		945DBB14BF49EE2472050DE4 /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005381881383BE26895F8261 /* GlassCard.swift */; };
 		97DD5CD38DF9824C4B121D80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D9AB8CEE30F145E56BB569E /* Assets.xcassets */; };
 		9C69D89FCF9E0AE6F56EE118 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53AF21F58383A80ECFFE2FF /* Animations.swift */; };
@@ -37,6 +38,8 @@
 		6743A81B2C792D1B2BCA017E /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
 		71B95DAF37A4F0EB86D9E3C4 /* RadarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChartView.swift; sourceTree = "<group>"; };
 		79ED67A616CF039461689D6A /* LapidaAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LapidaAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C442DA22F75A6B50007002B /* StoreSevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSevice.swift; sourceTree = "<group>"; };
+		7C442DA42F75B41B0007002B /* LapidaAI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LapidaAI.entitlements; sourceTree = "<group>"; };
 		81673F0B7F112CF5E27C985D /* ResultDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDashboardView.swift; sourceTree = "<group>"; };
 		9C3181CD1D41016C957873B6 /* SuggestionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCardView.swift; sourceTree = "<group>"; };
 		A8AE0C6B42127126F350E22B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -64,6 +67,7 @@
 		16C5F542E708210C326F065A /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7C442DA22F75A6B50007002B /* StoreSevice.swift */,
 				EC8ED6EE43E113A238E0AE4B /* APIService.swift */,
 			);
 			path = Services;
@@ -72,6 +76,7 @@
 		22C9734FC742D28198A11D87 /* LapidaAI */ = {
 			isa = PBXGroup;
 			children = (
+				7C442DA42F75B41B0007002B /* LapidaAI.entitlements */,
 				2D9AB8CEE30F145E56BB569E /* Assets.xcassets */,
 				A8AE0C6B42127126F350E22B /* Info.plist */,
 				FA24AF8BAF56CD78CF662C44 /* App */,
@@ -258,6 +263,7 @@
 				3124CE9753570D4906F2DCFB /* PremiumModalView.swift in Sources */,
 				B78E583FCBB0FF17D46208F2 /* QRCodeGenerator.swift in Sources */,
 				D01017C2B62C1C02B27DE669 /* RadarChartView.swift in Sources */,
+				7C442DA32F75A6BB0007002B /* StoreSevice.swift in Sources */,
 				EC11EADF1A4966A292D5CAD6 /* ResultDashboardView.swift in Sources */,
 				379E2664E164A072242F3C15 /* SuggestionCardView.swift in Sources */,
 			);
@@ -271,6 +277,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LapidaAI/LapidaAI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6F2KGULZ85;
@@ -427,6 +434,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LapidaAI/LapidaAI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6F2KGULZ85;

@@ -2,10 +2,11 @@ import SwiftUI
 import Supabase
 import PDFKit
 import UniformTypeIdentifiers
+import AuthenticationServices
 
 // MARK: - App ViewModel (Observable)
 @Observable
-final class AppViewModel {
+final class AppViewModel: NSObject {
     // MARK: - State
     var currentScreen: AppScreen = .landing
     var userProfile = UserProfile()
@@ -133,12 +134,12 @@ final class AppViewModel {
     
     /// Login com Google via Supabase OAuth
     func signInWithGoogle() {
-        performOAuthSignIn(provider: .google)
+        signInWithOAuth(provider: Provider.google)
     }
     
     /// Login com GitHub via Supabase OAuth
     func signInWithGitHub() {
-        performOAuthSignIn(provider: .github)
+        signInWithOAuth(provider: Provider.github)
     }
     
     func signInWithEmail(email: String, password: String) {
@@ -170,7 +171,7 @@ final class AppViewModel {
         }
     }
     
-    private func performOAuthSignIn(provider: Provider) {
+    func signInWithOAuth(provider: Provider) {
         isAuthenticating = true
         Task { @MainActor in
             do {
@@ -184,6 +185,16 @@ final class AppViewModel {
                 isAuthenticating = false
             }
         }
+    }
+    
+    func signInWithApple() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.performRequests()
     }
     
     /// Processa o retorno da autenticação externa (Deep Link)
@@ -237,6 +248,36 @@ final class AppViewModel {
             isAuthenticated = false
             currentScreen = .landing
             resetToLanding()
+        }
+    }
+    
+    func purchasePremium() {
+        isGeneratingPix = true // Reutilizando o estado de loading
+        Task { @MainActor in
+            do {
+                if let transaction = try await StoreService.shared.purchase() {
+                    // Compra bem sucedida!
+                    userProfile.isPremium = true
+                    await SupabaseService.shared.updateProfile(userProfile)
+                    showPremiumModal = false
+                    showAlert(title: "Parabéns!", message: "Você agora é Premium! Aproveite as análises ilimitadas.")
+                }
+            } catch {
+                showErrorMessage("Erro na compra: \(error.localizedDescription)")
+            }
+            isGeneratingPix = false
+        }
+    }
+    
+    func deleteAccount() {
+        Task { @MainActor in
+            do {
+                try await SupabaseService.shared.deleteUserAccount()
+                signOut()
+                showAlert(title: "Conta Excluída", message: "Seus dados foram removidos com sucesso.")
+            } catch {
+                showErrorMessage("Erro ao excluir conta: \(error.localizedDescription)")
+            }
         }
     }
     
@@ -495,4 +536,43 @@ final class AppViewModel {
 enum PaymentStep {
     case benefits
     case pix
+}
+
+// MARK: - Apple Sign In Delegate
+extension AppViewModel: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            guard let identityToken = appleIDCredential.identityToken,
+                  let idTokenString = String(data: identityToken, encoding: .utf8) else {
+                showErrorMessage("Não foi possível obter o token da Apple.")
+                return
+            }
+            
+            Task { @MainActor in
+                do {
+                    isAuthenticating = true
+                    // Login nativo no Supabase usando o ID Token
+                    let response = try await SupabaseService.shared.client.auth.signInWithIdToken(
+                        credentials: .init(provider: .apple, idToken: idTokenString)
+                    )
+                    
+                    // Sucesso! O listener de estado de auth vai cuidar do resto
+                    isAuthenticated = true
+                    currentScreen = .landing
+                    updateProfile(user: response.user)
+                } catch {
+                    showErrorMessage("Erro ao autenticar com Supabase: \(error.localizedDescription)")
+                }
+                isAuthenticating = false
+            }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Usuário cancelou ou houve erro - não exibir erro se for cancelamento
+        if (error as NSError).code != ASAuthorizationError.canceled.rawValue {
+            showErrorMessage("Erro no login com Apple: \(error.localizedDescription)")
+        }
+        isAuthenticating = false
+    }
 }

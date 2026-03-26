@@ -89,6 +89,12 @@ struct LandingView: View {
                 } label: {
                     Label("Sair da Conta", systemImage: "rectangle.portrait.and.arrow.right")
                 }
+                
+                Button(role: .destructive) {
+                    viewModel.deleteAccount()
+                } label: {
+                    Label("Excluir Minha Conta", systemImage: "person.badge.minus")
+                }
             } label: {
                 HStack(spacing: AppSpacing.sm) {
                     if !viewModel.userProfile.isPremium {

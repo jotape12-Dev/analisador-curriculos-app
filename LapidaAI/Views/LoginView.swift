@@ -109,6 +109,28 @@ struct LoginView: View {
             
             Spacer()
             
+            // Apple Login Button
+            Button {
+                isLoggingIn = true
+                viewModel.signInWithApple()
+            } label: {
+                HStack(spacing: AppSpacing.md) {
+                    Image(systemName: "apple.logo")
+                        .font(.system(size: 20))
+                    
+                    Text("Continuar com Apple")
+                        .font(AppTypography.headline)
+                }
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, AppSpacing.lg)
+                .background(Color.black)
+                .clipShape(RoundedRectangle(cornerRadius: AppRadius.lg))
+            }
+            .disabled(isLoggingIn)
+            .padding(.top, AppSpacing.md)
+            
+            // Google Login Button
             Button {
                 isLoggingIn = true
                 viewModel.signInWithGoogle()
