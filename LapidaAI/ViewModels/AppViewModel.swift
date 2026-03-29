@@ -27,17 +27,8 @@ final class AppViewModel: NSObject {
     var loadingProgress: CGFloat = 0
     
     // Payment state
-    var paymentStep: PaymentStep = .benefits
-    var isGeneratingPix = false
-    var pixPayload: String = ""
-    var ticketUrl: String = ""
-    var paymentId: String?
-    var isCheckingPayment = false
-    var paymentConfirmed = false
-    var pixCopied = false
+    var isPurchasing = false
     
-    // Payment polling timer
-    private var pollingTimer: Timer?
     
     // MARK: - Loading Messages
     private let loadingMessages = [
@@ -252,20 +243,23 @@ final class AppViewModel: NSObject {
     }
     
     func purchasePremium() {
-        isGeneratingPix = true // Reutilizando o estado de loading
+        print("DEBUG: Iniciando processo de compra StoreKit...")
+        isPurchasing = true
         Task { @MainActor in
             do {
-                if let transaction = try await StoreService.shared.purchase() {
+                if let _ = try await StoreService.shared.purchase() {
                     // Compra bem sucedida!
                     userProfile.isPremium = true
-                    await SupabaseService.shared.updateProfile(userProfile)
+                    // Atualiza o perfil no Supabase para persistência
+                    try await SupabaseService.shared.updateProfile(userProfile)
+                    
                     showPremiumModal = false
                     showAlert(title: "Parabéns!", message: "Você agora é Premium! Aproveite as análises ilimitadas.")
                 }
             } catch {
-                showErrorMessage("Erro na compra: \(error.localizedDescription)")
+                showErrorMessage(error.localizedDescription)
             }
-            isGeneratingPix = false
+            isPurchasing = false
         }
     }
     
@@ -315,118 +309,6 @@ final class AppViewModel: NSObject {
         }
         
         return fullText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : fullText
-    }
-    
-    // MARK: - Payment Flow
-    func generatePix() {
-        paymentStep = .pix
-        isGeneratingPix = true
-        
-        Task { @MainActor in
-            do {
-                let response = try await PaymentService.shared.createPixPayment()
-                
-                if let qrCode = response.qrCode, let id = response.paymentId {
-                    pixPayload = qrCode
-                    ticketUrl = response.ticketUrl ?? qrCode
-                    paymentId = String(id)
-                    startPaymentPolling()
-                } else {
-                    showErrorMessage(response.error ?? "Não foi possível gerar o PIX.")
-                    paymentStep = .benefits
-                }
-            } catch {
-                showErrorMessage("Erro ao processar pagamento.")
-                paymentStep = .benefits
-            }
-            
-            isGeneratingPix = false
-        }
-    }
-    
-    func copyPixCode() {
-        guard !pixPayload.isEmpty else { return }
-        UIPasteboard.general.string = pixPayload
-        
-        withAnimation(.spring(response: 0.3)) {
-            pixCopied = true
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-            withAnimation { self?.pixCopied = false }
-        }
-    }
-    
-    func checkPaymentManually() {
-        guard let paymentId else { return }
-        isCheckingPayment = true
-        
-        Task { @MainActor in
-            do {
-                let response = try await PaymentService.shared.checkPaymentStatus(paymentId: paymentId)
-                if response.status == "approved" {
-                    confirmPayment()
-                } else {
-                    showErrorMessage("Ainda não recebemos a confirmação. Aguarde uns segundinhos.")
-                }
-            } catch {
-                showErrorMessage("Erro ao verificar status.")
-            }
-            isCheckingPayment = false
-        }
-    }
-    
-    private func startPaymentPolling() {
-        pollingTimer?.invalidate()
-        pollingTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { [weak self] timer in
-            guard let self = self, let paymentId = self.paymentId, !self.paymentConfirmed else {
-                timer.invalidate()
-                return
-            }
-            
-            Task { @MainActor in
-                do {
-                    let response = try await PaymentService.shared.checkPaymentStatus(paymentId: paymentId)
-                    if response.status == "approved" {
-                        timer.invalidate()
-                        self.confirmPayment()
-                    }
-                } catch {
-                    // Silently ignore polling errors
-                }
-            }
-        }
-    }
-    
-    private func confirmPayment() {
-        withAnimation(.spring(response: 0.5)) {
-            paymentConfirmed = true
-            userProfile.isPremium = true
-            userProfile.analysisCount = 0
-        }
-        
-        stopPaymentPolling()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-            self?.showPremiumModal = false
-            self?.resetPaymentState()
-        }
-    }
-    
-    func stopPaymentPolling() {
-        pollingTimer?.invalidate()
-        pollingTimer = nil
-    }
-    
-    func resetPaymentState() {
-        paymentStep = .benefits
-        isGeneratingPix = false
-        pixPayload = ""
-        paymentId = nil
-        isCheckingPayment = false
-        paymentConfirmed = false
-        pixCopied = false
-        stopPaymentPolling()
     }
     
     // MARK: - Navigation
@@ -530,12 +412,6 @@ final class AppViewModel: NSObject {
             )
         )
     }
-}
-
-// MARK: - Payment Step
-enum PaymentStep {
-    case benefits
-    case pix
 }
 
 // MARK: - Apple Sign In Delegate

@@ -180,29 +180,7 @@ struct UserProfile: Codable {
     }
 }
 
-// MARK: - Payment Models
-struct PaymentCreateResponse: Codable {
-    let qrCode: String?
-    let qrCodeBase64: String?
-    let ticketUrl: String?
-    let paymentId: Int64?
-    let error: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case qrCode = "qr_code"
-        case qrCodeBase64 = "qr_code_base_64"
-        case ticketUrl = "ticket_url"
-        case paymentId = "payment_id"
-        case error
-    }
-}
-
-struct PaymentStatusResponse: Codable {
-    let status: String
-    let error: String?
-}
-
-// MARK: - App State
+// MARK: - App Screen
 enum AppScreen {
     case landing
     case loading

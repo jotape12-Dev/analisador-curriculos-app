@@ -67,7 +67,7 @@ struct ContentView: View {
                 .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
                 .presentationBackground(.ultraThinMaterial)
-                .interactiveDismissDisabled(viewModel.isGeneratingPix || viewModel.isCheckingPayment)
+                .interactiveDismissDisabled(viewModel.isPurchasing)
         }
     }
 }

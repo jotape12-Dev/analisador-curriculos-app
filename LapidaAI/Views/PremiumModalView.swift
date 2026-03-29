@@ -4,6 +4,10 @@ struct PremiumModalView: View {
     @Environment(AppViewModel.self) private var viewModel
     @Environment(\.dismiss) private var dismiss
     
+    // StoreService is @Observable, but we need to reference it as a @State 
+    // to ensure this view observes its updates properly.
+    @State private var storeService = StoreService.shared
+    
     @State private var benefitAnimations: [Bool] = Array(repeating: false, count: 4)
     @State private var showContent = false
     
@@ -44,12 +48,12 @@ struct PremiumModalView: View {
                                 .tracking(2)
                                 .foregroundStyle(AppColors.textTertiary)
                             
-                            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                                Text("R$")
-                                    .font(.system(size: 18, weight: .medium, design: .rounded))
-                                    .foregroundStyle(AppColors.textSecondary)
-                                
-                                Text("9,90")
+                            if storeService.isLoadingProducts && storeService.products.isEmpty {
+                                ProgressView()
+                                    .tint(AppColors.gold)
+                                    .padding(.vertical, AppSpacing.md)
+                            } else if let product = storeService.premiumProduct {
+                                Text(product.displayPrice)
                                     .font(.system(size: 48, weight: .bold, design: .rounded))
                                     .foregroundStyle(
                                         LinearGradient(
@@ -58,6 +62,10 @@ struct PremiumModalView: View {
                                             endPoint: .trailing
                                         )
                                     )
+                            } else {
+                                Text("R$ 9,90") // Fallback
+                                    .font(.system(size: 48, weight: .bold, design: .rounded))
+                                    .opacity(0.5)
                             }
                         }
                         .frame(maxWidth: .infinity)
@@ -77,6 +85,11 @@ struct PremiumModalView: View {
                 showContent = true
             }
             animateBenefits()
+            
+            // Garante que os produtos sejam carregados ao abrir o modal
+            Task {
+                await storeService.fetchProducts()
+            }
         }
     }
     
@@ -155,10 +168,14 @@ struct PremiumModalView: View {
                 viewModel.purchasePremium()
             } label: {
                 HStack(spacing: AppSpacing.sm) {
-                    if viewModel.isGeneratingPix {
+                    if viewModel.isPurchasing {
                         ProgressView()
                             .tint(AppColors.background)
                         Text("Processando...")
+                    } else if storeService.isLoadingProducts && storeService.products.isEmpty {
+                        ProgressView()
+                            .tint(AppColors.background)
+                        Text("Buscando Preço...")
                     } else {
                         Image(systemName: "apple.logo")
                             .font(.system(size: 14, weight: .bold))
@@ -179,13 +196,11 @@ struct PremiumModalView: View {
                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.lg))
                 .shadow(color: AppColors.gold.opacity(0.3), radius: 10)
             }
-            .disabled(viewModel.isGeneratingPix)
             .padding(.horizontal, AppSpacing.xl)
             
             HStack(spacing: AppSpacing.xl) {
                 Button {
-                    // StoreKit 2 handles restore automatically, but a button is required
-                    Task { await StoreService.shared.updatePurchasedProducts() }
+                    Task { await storeService.updatePurchasedProducts() }
                 } label: {
                     Text("Restaurar Compras")
                         .font(AppTypography.caption)

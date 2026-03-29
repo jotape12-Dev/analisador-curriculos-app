@@ -194,64 +194,6 @@ actor APIService {
     }
 }
 
-// MARK: - Payment Service
-actor PaymentService {
-    static let shared = PaymentService()
-    
-    private let session: URLSession
-    
-    private init() {
-        self.session = URLSession.shared
-    }
-    
-    func createPixPayment() async throws -> PaymentCreateResponse {
-        guard let url = URL(string: APIConfig.baseURL + APIConfig.Endpoints.paymentCreate) else {
-            throw APIError.invalidURL
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        // Injetar Token do Supabase
-        if let token = await SupabaseService.shared.getSessionToken() {
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
-        
-        let (data, response) = try await session.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw APIError.invalidResponse
-        }
-        
-        if httpResponse.statusCode == 200 {
-            do {
-                return try JSONDecoder().decode(PaymentCreateResponse.self, from: data)
-            } catch {
-                throw APIError.decodingError
-            }
-        } else {
-            throw APIError.serverError(httpResponse.statusCode)
-        }
-    }
-    
-    func checkPaymentStatus(paymentId: String) async throws -> PaymentStatusResponse {
-        guard let url = URL(string: "\(APIConfig.baseURL)\(APIConfig.Endpoints.paymentStatus)?id=\(paymentId)") else {
-            throw APIError.invalidURL
-        }
-        
-        var request = URLRequest(url: url)
-        
-        // Injetar Token do Supabase
-        if let token = await SupabaseService.shared.getSessionToken() {
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
-        
-        let (data, _) = try await session.data(for: request)
-        return try JSONDecoder().decode(PaymentStatusResponse.self, from: data)
-    }
-}
-
 // MARK: - API Errors
 enum APIError: LocalizedError {
     case invalidURL

@@ -3,29 +3,29 @@ import SwiftUI
 // MARK: - Color Palette
 struct AppColors {
     // Backgrounds
-    static let background = Color(hex: "09090b")        // Zinc 950
-    static let surface = Color(hex: "18181b")            // Zinc 900
-    static let surfaceLight = Color(hex: "27272a")       // Zinc 800
+    static let background = Color(hex: "09090b")
+    static let surface = Color(hex: "18181b")
+    static let surfaceLight = Color(hex: "27272a")
     
     // Text
     static let textPrimary = Color.white
-    static let textSecondary = Color(hex: "a1a1aa")      // Zinc 400
-    static let textTertiary = Color(hex: "71717a")       // Zinc 500
+    static let textSecondary = Color(hex: "a1a1aa")
+    static let textTertiary = Color(hex: "71717a")
     
     // Accent
-    static let primary = Color(hex: "06b6d4")            // Cyan 500
-    static let primaryLight = Color(hex: "22d3ee")       // Cyan 400
-    static let primaryDark = Color(hex: "0891b2")        // Cyan 600
+    static let primary = Color(hex: "06b6d4")
+    static let primaryLight = Color(hex: "22d3ee")
+    static let primaryDark = Color(hex: "0891b2")
     
     // Premium
-    static let gold = Color(hex: "f59e0b")               // Amber 500
-    static let goldLight = Color(hex: "fbbf24")          // Amber 400
+    static let gold = Color(hex: "f59e0b")
+    static let goldLight = Color(hex: "fbbf24")
     
     // Status
-    static let success = Color(hex: "22c55e")            // Green 500
-    static let warning = Color(hex: "f97316")            // Orange 500
-    static let danger = Color(hex: "ef4444")             // Red 500
-    static let info = Color(hex: "3b82f6")               // Blue 500
+    static let success = Color(hex: "22c55e")
+    static let warning = Color(hex: "f97316")
+    static let danger = Color(hex: "ef4444")
+    static let info = Color(hex: "3b82f6")
     
     // Glass
     static let glassBorder = Color.white.opacity(0.08)

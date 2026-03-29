@@ -1,0 +1,61 @@
+{
+  "identifier" : "E0D9C19A",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "9.90",
+      "familyShareable" : false,
+      "internalID" : "C7B2F6E1",
+      "localizations" : [
+        {
+          "description" : "Acesso vitalício ao LapidaAI Premium",
+          "displayName" : "LapidaAI Premium",
+          "locale" : "pt_BR"
+        },
+        {
+          "description" : "Lifetime access to LapidaAI Premium",
+          "displayName" : "LapidaAI Premium",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.lapidaai.premium",
+      "referenceName" : "Premium",
+      "type" : "non-consumable"
+    },
+    {
+      "displayPrice" : "9.90",
+      "familyShareable" : false,
+      "internalID" : "C7B2F6E2",
+      "localizations" : [
+        {
+          "description" : "Acesso vitalício ao LapidaAI Premium",
+          "displayName" : "LapidaAI Premium",
+          "locale" : "pt_BR"
+        },
+        {
+          "description" : "Lifetime access to LapidaAI Premium",
+          "displayName" : "LapidaAI Premium",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.lapidaai.app.premium",
+      "referenceName" : "Premium Alternative ID",
+      "type" : "non-consumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "pt_BR",
+    "_storefront" : "BRA",
+    "_type" : "settings"
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
