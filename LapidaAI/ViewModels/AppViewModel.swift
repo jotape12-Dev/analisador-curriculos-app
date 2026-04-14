@@ -26,10 +26,48 @@ final class AppViewModel: NSObject {
     var loadingMessage = "Preparando análise..."
     var loadingProgress: CGFloat = 0
     
+    // History
+    var analysisHistory: [HistoryEntry] = []
+
     // Payment state
     var isPurchasing = false
     
     
+    // MARK: - History Persistence
+    private let historyKey = "lapidaai_history"
+
+    func loadHistory() {
+        guard let data = UserDefaults.standard.data(forKey: historyKey),
+              let entries = try? JSONDecoder().decode([HistoryEntry].self, from: data) else { return }
+        analysisHistory = entries
+    }
+
+    private func saveHistory() {
+        guard let data = try? JSONEncoder().encode(analysisHistory) else { return }
+        UserDefaults.standard.set(data, forKey: historyKey)
+    }
+
+    private func addToHistory(result: AnalysisResult, inputPreview: String) {
+        let entry = HistoryEntry(result: result, inputPreview: inputPreview)
+        analysisHistory.insert(entry, at: 0)
+        if analysisHistory.count > 50 {
+            analysisHistory = Array(analysisHistory.prefix(50))
+        }
+        saveHistory()
+    }
+
+    func deleteHistoryEntry(_ entry: HistoryEntry) {
+        analysisHistory.removeAll { $0.id == entry.id }
+        saveHistory()
+    }
+
+    func openHistoryEntry(_ entry: HistoryEntry) {
+        analysisResult = entry.result
+        withAnimation(.spring(response: 0.6, dampingFraction: 0.85)) {
+            currentScreen = .result
+        }
+    }
+
     // MARK: - Loading Messages
     private let loadingMessages = [
         "Lendo seções do currículo...",
@@ -49,9 +87,17 @@ final class AppViewModel: NSObject {
             showPremiumModal = true
             return
         }
-        
-        guard !inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+
+        let trimmed = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let wordCount = trimmed.split(separator: " ").count
+
+        guard !trimmed.isEmpty else {
             showErrorMessage("Por favor, insira o texto do seu currículo ou importe um PDF.")
+            return
+        }
+
+        guard wordCount >= 30 else {
+            showErrorMessage("O texto é muito curto para ser analisado. Por favor, insira pelo menos 30 palavras do seu currículo.")
             return
         }
         
@@ -68,23 +114,29 @@ final class AppViewModel: NSObject {
                 // Simulate minimum loading time for polish
                 async let apiResult = APIService.shared.analyzeResume(text: inputText)
                 async let minimumDelay: () = Task.sleep(nanoseconds: 3_500_000_000)
-                
+
                 let result = try await apiResult
                 _ = try? await minimumDelay
-                
+
                 analysisResult = result
+
+                let preview = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+                addToHistory(result: result, inputPreview: String(preview.prefix(80)))
+
+                // O servidor já incrementa analysis_count; apenas sincroniza o perfil local
+                fetchProfileData()
+
+                withAnimation(.spring(response: 0.8, dampingFraction: 0.85)) {
+                    currentScreen = .result
+                    isAnalyzing = false
+                }
             } catch {
-                // Use demo data for development/offline
-                loadDemoData()
-            }
-            
-            // Incrementa sempre que terminar uma análise
-            userProfile.analysisCount += 1
-            Task { await SupabaseService.shared.updateProfile(userProfile) }
-            
-            withAnimation(.spring(response: 0.8, dampingFraction: 0.85)) {
-                currentScreen = .result
-                isAnalyzing = false
+                withAnimation {
+                    currentScreen = .landing
+                    isAnalyzing = false
+                    loadingProgress = 0
+                }
+                showErrorMessage("Não foi possível analisar o currículo. Verifique sua conexão e tente novamente.\n\nDetalhe: \(error.localizedDescription)")
             }
         }
     }
@@ -113,6 +165,7 @@ final class AppViewModel: NSObject {
     
     // MARK: - Authentication
     func checkSession() {
+        loadHistory()
         Task { @MainActor in
             if let user = await SupabaseService.shared.getCurrentUser() {
                 updateProfile(user: user)

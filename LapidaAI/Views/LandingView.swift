@@ -6,6 +6,7 @@ struct LandingView: View {
     @State private var showTextEditor = false
     @State private var heroOpacity: CGFloat = 0
     @State private var cardsOffset: CGFloat = 50
+    @State private var showHistory = false
     @FocusState private var isTextEditorFocused: Bool
     
     var body: some View {
@@ -68,6 +69,22 @@ struct LandingView: View {
     // MARK: - Header Section
     private var headerSection: some View {
         HStack {
+            // History Button
+            Button {
+                showHistory = true
+            } label: {
+                Image(systemName: "clock.arrow.circlepath")
+                    .font(.system(size: 20, weight: .medium))
+                    .foregroundStyle(AppColors.textSecondary)
+                    .padding(AppSpacing.sm)
+                    .background(.ultraThinMaterial)
+                    .clipShape(Circle())
+            }
+            .fullScreenCover(isPresented: $showHistory) {
+                HistoryView(isPresented: $showHistory)
+                    .environment(viewModel)
+            }
+
             Spacer()
             
             Menu {
@@ -343,7 +360,7 @@ struct LandingView: View {
             LazyVGrid(columns: [
                 GridItem(.flexible(), spacing: AppSpacing.md),
                 GridItem(.flexible(), spacing: AppSpacing.md)
-            ], spacing: AppSpacing.md) {
+            ], alignment: .leading, spacing: AppSpacing.md) {
                 FeatureCard(
                     icon: "cpu",
                     title: "Análise ATS",
@@ -457,32 +474,47 @@ struct FeatureCard: View {
     let title: String
     let description: String
     let color: Color
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: AppSpacing.sm) {
-            ZStack {
-                RoundedRectangle(cornerRadius: AppRadius.sm)
-                    .fill(color.opacity(0.12))
-                    .frame(width: 36, height: 36)
-                
+            // Colored accent line at top
+            Rectangle()
+                .fill(
+                    LinearGradient(
+                        colors: [color, color.opacity(0.3)],
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
+                .frame(height: 2)
+                .clipShape(Capsule())
+
+            VStack(alignment: .leading, spacing: AppSpacing.xs) {
                 Image(systemName: icon)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(color)
+                    .font(.system(size: 22, weight: .medium))
+                    .foregroundStyle(color.opacity(0.85))
+                    .padding(.top, AppSpacing.xs)
+
+                Text(title)
+                    .font(AppTypography.caption)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(AppColors.textPrimary)
+
+                Text(description)
+                    .font(.system(size: 11, weight: .regular))
+                    .foregroundStyle(AppColors.textTertiary)
+                    .lineSpacing(2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            
-            Text(title)
-                .font(AppTypography.caption)
-                .fontWeight(.bold)
-                .foregroundStyle(AppColors.textPrimary)
-            
-            Text(description)
-                .font(.system(size: 11, weight: .regular))
-                .foregroundStyle(AppColors.textTertiary)
-                .lineSpacing(2)
-                .fixedSize(horizontal: false, vertical: true)
+            .padding([.horizontal, .bottom], AppSpacing.sm)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .glassCard(cornerRadius: AppRadius.lg, padding: AppSpacing.md)
+        .frame(maxWidth: .infinity, minHeight: 130, alignment: .topLeading)
+        .background(color.opacity(0.04))
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.lg))
+        .overlay(
+            RoundedRectangle(cornerRadius: AppRadius.lg)
+                .stroke(AppColors.glassBorder.opacity(0.4), lineWidth: 0.5)
+        )
     }
 }
 

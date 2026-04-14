@@ -180,6 +180,21 @@ struct UserProfile: Codable {
     }
 }
 
+// MARK: - History Entry
+struct HistoryEntry: Codable, Identifiable {
+    let id: UUID
+    let result: AnalysisResult
+    let inputPreview: String
+    let analyzedAt: Date
+
+    init(id: UUID = UUID(), result: AnalysisResult, inputPreview: String) {
+        self.id = id
+        self.result = result
+        self.inputPreview = inputPreview
+        self.analyzedAt = result.metadata.analyzedAt
+    }
+}
+
 // MARK: - App Screen
 enum AppScreen {
     case landing

@@ -46,7 +46,7 @@ actor APIService {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
         
-        let body: [String: Any] = ["text": text]
+        let body: [String: Any] = ["curriculo": text]
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
         
         let (data, response) = try await session.data(for: request)
@@ -65,58 +65,90 @@ actor APIService {
     }
     
     // MARK: - Parse Analysis Response
+    // API returns: score_geral, scores{ats, aderencia_vaga, qualidade_experiencias, clareza},
+    //              resumo, skills_encontradas, skills_faltantes, secoes_presentes, secoes_faltantes,
+    //              recomendacoes[{titulo, descricao, sugestao}], _profile{analysis_count, is_premium}
     private func parseAnalysisResponse(_ json: [String: Any]) -> AnalysisResult {
-        let overallScore = json["overall_score"] as? Int ?? 65
-        
-        // Parse dimensions
-        let dimensionsRaw = json["dimensions"] as? [[String: Any]] ?? []
-        let dimensions: [AnalysisDimension] = dimensionsRaw.isEmpty
-            ? Self.defaultDimensions(score: overallScore)
-            : dimensionsRaw.map { dim in
-                AnalysisDimension(
-                    name: dim["name"] as? String ?? "",
-                    score: dim["score"] as? Double ?? 0.5,
-                    maxScore: 1.0,
-                    label: dim["label"] as? String ?? "",
-                    icon: dim["icon"] as? String ?? "circle"
-                )
-            }
-        
-        // Parse suggestions
-        let suggestionsRaw = json["suggestions"] as? [[String: Any]] ?? []
-        let suggestions: [Suggestion] = suggestionsRaw.isEmpty
-            ? Self.defaultSuggestions()
-            : suggestionsRaw.map { sug in
-                Suggestion(
-                    title: sug["title"] as? String ?? "",
-                    description: sug["description"] as? String ?? "",
-                    priority: SuggestionPriority(rawValue: sug["priority"] as? String ?? "medium") ?? .medium,
-                    category: sug["category"] as? String ?? "",
-                    icon: sug["icon"] as? String ?? "lightbulb",
-                    isPremium: sug["is_premium"] as? Bool ?? false
-                )
-            }
-        
-        // Parse action plan
-        var actionPlan: ActionPlan? = nil
-        if let planDict = json["action_plan"] as? [String: Any] {
-            let steps = (planDict["steps"] as? [[String: Any]] ?? []).enumerated().map { (i, step) in
-                ActionStep(
-                    order: i + 1,
-                    title: step["title"] as? String ?? "",
-                    description: step["description"] as? String ?? "",
-                    estimatedImpact: step["impact"] as? String ?? ""
-                )
-            }
-            actionPlan = ActionPlan(
-                summary: planDict["summary"] as? String ?? "",
-                steps: steps,
-                insights: planDict["insights"] as? [String] ?? []
+        let overallScore = json["score_geral"] as? Int ?? 50
+
+        // Parse dimensions from scores object
+        // JSONSerialization returns numbers as NSNumber, so extract via NSNumber.doubleValue
+        let scores = json["scores"] as? [String: Any] ?? [:]
+        func extractScore(_ key: String) -> Double {
+            if let d = scores[key] as? Double { return d }
+            if let i = scores[key] as? Int { return Double(i) }
+            return 50.0
+        }
+        let ats = extractScore("ats")
+        let aderencia = extractScore("aderencia_vaga")
+        let experiencia = extractScore("qualidade_experiencias")
+        let clareza = extractScore("clareza")
+
+        let dimensions: [AnalysisDimension] = [
+            AnalysisDimension(name: "ATS", score: ats / 100.0, maxScore: 1.0, label: "Compatibilidade ATS", icon: "cpu"),
+            AnalysisDimension(name: "Aderência", score: aderencia / 100.0, maxScore: 1.0, label: "Aderência à Vaga", icon: "target"),
+            AnalysisDimension(name: "Experiência", score: experiencia / 100.0, maxScore: 1.0, label: "Qualidade das Experiências", icon: "briefcase"),
+            AnalysisDimension(name: "Clareza", score: clareza / 100.0, maxScore: 1.0, label: "Clareza e Objetividade", icon: "text.alignleft"),
+        ]
+
+        // Parse suggestions from recomendacoes
+        let prioridades: [SuggestionPriority] = [.critical, .high, .medium, .medium, .low]
+        let iconePorIndice = ["chart.line.uptrend.xyaxis", "cpu", "list.bullet.rectangle", "text.magnifyingglass", "lightbulb"]
+        let recomendacoes = json["recomendacoes"] as? [[String: Any]] ?? []
+
+        var suggestions: [Suggestion] = recomendacoes.enumerated().map { (i, rec) in
+            let titulo = rec["titulo"] as? String ?? ""
+            let descricao = rec["descricao"] as? String ?? ""
+            let sugestao = rec["sugestao"] as? String ?? ""
+            let fullDescription = sugestao.isEmpty ? descricao : "\(descricao)\n\n💡 \(sugestao)"
+            return Suggestion(
+                title: titulo,
+                description: fullDescription,
+                priority: prioridades[min(i, prioridades.count - 1)],
+                category: "Melhoria",
+                icon: iconePorIndice[min(i, iconePorIndice.count - 1)]
             )
         }
-        
-        let sectionsFound = json["sections_found"] as? [String] ?? ["Dados Pessoais", "Experiência", "Formação"]
-        
+
+        // Add locked premium suggestions
+        suggestions += [
+            Suggestion(
+                title: "Plano de ação detalhado",
+                description: "Receba um plano passo-a-passo exclusivo com sugestões de reescrita para cada seção.",
+                priority: .high,
+                category: "Premium",
+                icon: "star.fill",
+                isPremium: true
+            ),
+            Suggestion(
+                title: "Reescrita com IA",
+                description: "Textos alternativos gerados pela IA para cada trecho fraco do seu currículo.",
+                priority: .high,
+                category: "Premium",
+                icon: "wand.and.stars",
+                isPremium: true
+            ),
+        ]
+
+        // Build action plan from resumo + recomendacoes + skills_faltantes
+        let resumo = json["resumo"] as? String ?? ""
+        let skillsFaltantes = json["skills_faltantes"] as? [String] ?? []
+        let actionSteps = recomendacoes.enumerated().map { (i, rec) in
+            ActionStep(
+                order: i + 1,
+                title: rec["titulo"] as? String ?? "",
+                description: rec["sugestao"] as? String ?? rec["descricao"] as? String ?? "",
+                estimatedImpact: ""
+            )
+        }
+        let insights: [String] = skillsFaltantes.isEmpty
+            ? ["Revise as seções faltantes e inclua métricas de impacto."]
+            : skillsFaltantes.map { "Habilidade ausente: \($0)" }
+
+        let actionPlan = ActionPlan(summary: resumo, steps: actionSteps, insights: insights)
+
+        let sectionsFound = json["secoes_presentes"] as? [String] ?? []
+
         return AnalysisResult(
             overallScore: overallScore,
             dimensions: dimensions,
@@ -125,73 +157,12 @@ actor APIService {
             metadata: AnalysisMetadata(
                 analyzedAt: Date(),
                 inputType: .text,
-                wordCount: (json["word_count"] as? Int) ?? 0,
+                wordCount: 0,
                 sectionsFound: sectionsFound
             )
         )
     }
     
-    // MARK: - Default Data (Demo/Fallback)
-    private static func defaultDimensions(score: Int) -> [AnalysisDimension] {
-        let base = Double(score) / 100.0
-        return [
-            AnalysisDimension(name: "ATS", score: min(base + 0.1, 1.0), maxScore: 1.0, label: "Compatibilidade ATS", icon: "cpu"),
-            AnalysisDimension(name: "Design", score: max(base - 0.05, 0), maxScore: 1.0, label: "Formatação Visual", icon: "paintbrush"),
-            AnalysisDimension(name: "Experiência", score: base, maxScore: 1.0, label: "Experiência Profissional", icon: "briefcase"),
-            AnalysisDimension(name: "Habilidades", score: min(base + 0.05, 1.0), maxScore: 1.0, label: "Competências Técnicas", icon: "star"),
-            AnalysisDimension(name: "Formação", score: max(base - 0.1, 0), maxScore: 1.0, label: "Formação Acadêmica", icon: "graduationcap"),
-            AnalysisDimension(name: "Impacto", score: max(base - 0.15, 0), maxScore: 1.0, label: "Resultados Mensuráveis", icon: "chart.bar"),
-        ]
-    }
-    
-    private static func defaultSuggestions() -> [Suggestion] {
-        [
-            Suggestion(
-                title: "Adicione métricas de impacto",
-                description: "Quantifique seus resultados com números concretos. Ex: 'Aumentei as vendas em 35%'.",
-                priority: .critical,
-                category: "Conteúdo",
-                icon: "chart.line.uptrend.xyaxis"
-            ),
-            Suggestion(
-                title: "Otimize para sistemas ATS",
-                description: "Use palavras-chave da vaga desejada nos títulos e descrições das experiências.",
-                priority: .high,
-                category: "ATS",
-                icon: "cpu"
-            ),
-            Suggestion(
-                title: "Melhore a seção de habilidades",
-                description: "Categorize suas competências em técnicas, ferramentas e soft skills.",
-                priority: .medium,
-                category: "Estrutura",
-                icon: "list.bullet.rectangle"
-            ),
-            Suggestion(
-                title: "Revisão gramatical",
-                description: "Considere usar ferramentas de revisão para garantir clareza textual.",
-                priority: .low,
-                category: "Linguagem",
-                icon: "text.magnifyingglass"
-            ),
-            Suggestion(
-                title: "Plano de ação personalizado",
-                description: "Desbloqueie seu plano exclusivo com passos detalhados para melhorar cada seção do currículo.",
-                priority: .high,
-                category: "Premium",
-                icon: "star.fill",
-                isPremium: true
-            ),
-            Suggestion(
-                title: "Sugestões textuais com IA",
-                description: "Receba sugestões de reescrita geradas pela IA para cada trecho do seu currículo.",
-                priority: .high,
-                category: "Premium",
-                icon: "wand.and.stars",
-                isPremium: true
-            ),
-        ]
-    }
 }
 
 // MARK: - API Errors

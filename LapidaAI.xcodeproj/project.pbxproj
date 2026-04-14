@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		031D857D65ACCD94EE2FD063 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = D688BAD8652D271E46E7ADFE /* Supabase */; };
+		0E0F78D086A1D76D2005EAE0 /* Products.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 3D32F45D886339BE61CAC962 /* Products.storekit */; };
 		247C991ABF2A2728C35817D6 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF069E27EBDD632F99B6714C /* LandingView.swift */; };
 		3124CE9753570D4906F2DCFB /* PremiumModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BEDA54F37C0E51F8FB25A /* PremiumModalView.swift */; };
 		379E2664E164A072242F3C15 /* SuggestionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3181CD1D41016C957873B6 /* SuggestionCardView.swift */; };
 		55CE39594B5345C308374CB2 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC8ED6EE43E113A238E0AE4B /* APIService.swift */; };
 		64C4B4BB31947F24EBB3F5CA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDEFD63E4D02BB7E6354A29D /* LoginView.swift */; };
 		7C1D6F34A7ED933F91A05536 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD4FA0F63976237F5455B48 /* AppTheme.swift */; };
-		7C442DA32F75A6BB0007002B /* StoreSevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C442DA22F75A6B50007002B /* StoreSevice.swift */; };
 		945DBB14BF49EE2472050DE4 /* GlassCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005381881383BE26895F8261 /* GlassCard.swift */; };
 		97DD5CD38DF9824C4B121D80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D9AB8CEE30F145E56BB569E /* Assets.xcassets */; };
 		9C69D89FCF9E0AE6F56EE118 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C53AF21F58383A80ECFFE2FF /* Animations.swift */; };
+		B15EAF0A8D46DD5EA2F11E65 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4884B2AD9EECB11B636781 /* HistoryView.swift */; };
 		B78E583FCBB0FF17D46208F2 /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6743A81B2C792D1B2BCA017E /* QRCodeGenerator.swift */; };
 		BA92A135223C826BB5AC347D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7769642C4325B481115AEC3 /* ContentView.swift */; };
 		C346AF64CDAEB23FD3B47748 /* AnalysisLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5107FC5768C3434DE6E2E382 /* AnalysisLoadingView.swift */; };
 		D01017C2B62C1C02B27DE669 /* RadarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B95DAF37A4F0EB86D9E3C4 /* RadarChartView.swift */; };
 		D92E922B0CF7EAA12BE827A9 /* LapidaAIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AAF00B7FCBCBA6036009A9A /* LapidaAIApp.swift */; };
 		D99896C7035EF26D2B03C5C2 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC4D573D9A98EF1EEFC1CD1 /* AppViewModel.swift */; };
+		E0FEF863A10D6609277A637B /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFBB226BA53A1E653E9571C /* StoreService.swift */; };
 		EC11EADF1A4966A292D5CAD6 /* ResultDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81673F0B7F112CF5E27C985D /* ResultDashboardView.swift */; };
 		F14D8755A661BF84908E3524 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195309A1C89CE59CADF19FDA /* Models.swift */; };
 /* End PBXBuildFile section */
@@ -34,18 +36,20 @@
 		2D9AB8CEE30F145E56BB569E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3AAF00B7FCBCBA6036009A9A /* LapidaAIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapidaAIApp.swift; sourceTree = "<group>"; };
 		3D2BEDA54F37C0E51F8FB25A /* PremiumModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumModalView.swift; sourceTree = "<group>"; };
+		3D32F45D886339BE61CAC962 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
 		5107FC5768C3434DE6E2E382 /* AnalysisLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisLoadingView.swift; sourceTree = "<group>"; };
+		5302176D7C6E30DB11672E84 /* LapidaAI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LapidaAI.entitlements; sourceTree = "<group>"; };
 		6743A81B2C792D1B2BCA017E /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
 		71B95DAF37A4F0EB86D9E3C4 /* RadarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChartView.swift; sourceTree = "<group>"; };
 		79ED67A616CF039461689D6A /* LapidaAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LapidaAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C442DA22F75A6B50007002B /* StoreSevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreSevice.swift; sourceTree = "<group>"; };
-		7C442DA42F75B41B0007002B /* LapidaAI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LapidaAI.entitlements; sourceTree = "<group>"; };
 		81673F0B7F112CF5E27C985D /* ResultDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDashboardView.swift; sourceTree = "<group>"; };
+		8B4884B2AD9EECB11B636781 /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		9C3181CD1D41016C957873B6 /* SuggestionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCardView.swift; sourceTree = "<group>"; };
 		A8AE0C6B42127126F350E22B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		ACD4FA0F63976237F5455B48 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		C53AF21F58383A80ECFFE2FF /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		C7769642C4325B481115AEC3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DAFBB226BA53A1E653E9571C /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
 		DF069E27EBDD632F99B6714C /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		EAC4D573D9A98EF1EEFC1CD1 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		EC8ED6EE43E113A238E0AE4B /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -67,8 +71,8 @@
 		16C5F542E708210C326F065A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7C442DA22F75A6B50007002B /* StoreSevice.swift */,
 				EC8ED6EE43E113A238E0AE4B /* APIService.swift */,
+				DAFBB226BA53A1E653E9571C /* StoreService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -76,9 +80,10 @@
 		22C9734FC742D28198A11D87 /* LapidaAI */ = {
 			isa = PBXGroup;
 			children = (
-				7C442DA42F75B41B0007002B /* LapidaAI.entitlements */,
 				2D9AB8CEE30F145E56BB569E /* Assets.xcassets */,
 				A8AE0C6B42127126F350E22B /* Info.plist */,
+				5302176D7C6E30DB11672E84 /* LapidaAI.entitlements */,
+				3D32F45D886339BE61CAC962 /* Products.storekit */,
 				FA24AF8BAF56CD78CF662C44 /* App */,
 				80019E6A50EFA3EC8D2F674B /* DesignSystem */,
 				674DA4E615F7FC395675C27E /* Models */,
@@ -121,6 +126,7 @@
 			children = (
 				5107FC5768C3434DE6E2E382 /* AnalysisLoadingView.swift */,
 				C7769642C4325B481115AEC3 /* ContentView.swift */,
+				8B4884B2AD9EECB11B636781 /* HistoryView.swift */,
 				DF069E27EBDD632F99B6714C /* LandingView.swift */,
 				EDEFD63E4D02BB7E6354A29D /* LoginView.swift */,
 				3D2BEDA54F37C0E51F8FB25A /* PremiumModalView.swift */,
@@ -239,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97DD5CD38DF9824C4B121D80 /* Assets.xcassets in Resources */,
+				0E0F78D086A1D76D2005EAE0 /* Products.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +263,7 @@
 				D99896C7035EF26D2B03C5C2 /* AppViewModel.swift in Sources */,
 				BA92A135223C826BB5AC347D /* ContentView.swift in Sources */,
 				945DBB14BF49EE2472050DE4 /* GlassCard.swift in Sources */,
+				B15EAF0A8D46DD5EA2F11E65 /* HistoryView.swift in Sources */,
 				247C991ABF2A2728C35817D6 /* LandingView.swift in Sources */,
 				D92E922B0CF7EAA12BE827A9 /* LapidaAIApp.swift in Sources */,
 				64C4B4BB31947F24EBB3F5CA /* LoginView.swift in Sources */,
@@ -263,8 +271,8 @@
 				3124CE9753570D4906F2DCFB /* PremiumModalView.swift in Sources */,
 				B78E583FCBB0FF17D46208F2 /* QRCodeGenerator.swift in Sources */,
 				D01017C2B62C1C02B27DE669 /* RadarChartView.swift in Sources */,
-				7C442DA32F75A6BB0007002B /* StoreSevice.swift in Sources */,
 				EC11EADF1A4966A292D5CAD6 /* ResultDashboardView.swift in Sources */,
+				E0FEF863A10D6609277A637B /* StoreService.swift in Sources */,
 				379E2664E164A072242F3C15 /* SuggestionCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,9 +285,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = LapidaAI/LapidaAI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6F2KGULZ85;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LapidaAI/Info.plist;
@@ -293,12 +300,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lapidaai.app;
 				PRODUCT_NAME = LapidaAI;
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -434,9 +437,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = LapidaAI/LapidaAI.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6F2KGULZ85;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LapidaAI/Info.plist;
@@ -450,12 +452,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lapidaai.app;
 				PRODUCT_NAME = LapidaAI;
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
